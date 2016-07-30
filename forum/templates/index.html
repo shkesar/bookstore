@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Index</title>
+</head>
+<body>
+	<form url="{% url 'forum:index' %}" method="POST" enctype="multipart/form-data">
+		<input type="file" name="docfile">
+		<input type="submit">
+
+		{% csrf_token %}
+	</form>
+
+	{% for doc in documents %}
+		<img src="{{ doc.docfile.url }}">
+	{% endfor %}
+</body>
+</html>
