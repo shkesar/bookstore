@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Chan</title>
+</head>
+<body>
+  <form url="{% url 'chan:create_thread' %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ thread_form.as_p }}
+    <input type="submit">
+  </form>
+
+  {% for thread in threads %}
+  <div class="thread">
+    <div class="top-post">
+      {{ thread.text }}
+      <img src="{{ thread.document.url }}">
+    </div>
+
+    <form url="{% url 'chan:create_post' thread.id %}" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ post_form.as_p }}
+      <input type="submit">
+    </form>
+
+    <div class="posts">
+    {% for post in thread.post_set %}
+      <div class="post">
+      {{ post.text }}
+      <img src="{{ post.document.url }}">
+      </div>
+    {% endfor %}
+    </div>
+
+  </div>
+  {% endfor %}
+
+</body>
+</html>

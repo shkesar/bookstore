@@ -21,4 +21,5 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^forum/', include('forum.urls', namespace='forum', app_name='forum')),
+    url(r'^chan/', include('chan.urls', namespace='chan', app_name='chan')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
